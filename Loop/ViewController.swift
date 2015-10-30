@@ -12,6 +12,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var landingScreenImage: UIImageView!
+    @IBOutlet weak var hitHintDotImage: UIImageView!
+    @IBOutlet weak var hitHintCircleImage: UIImageView!
     
     var headlines: [PFObject]! = []
 
@@ -48,6 +50,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
 //        let numberOfSections = tableView.numberOfSections
 //        let numberOfRowsInSection = tableView.numberOfRowsInSection(numberOfSections-1)
+        
+        UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
+            self.hitHintCircleImage.transform = CGAffineTransformMakeScale(1.3, 1.3)
+            }) { (Bool) -> Void in
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -114,10 +121,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if sender.state == UIGestureRecognizerState.Began {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
                 self.landingScreenImage.alpha = 0
+                self.hitHintCircleImage.alpha = 0
+                self.hitHintDotImage.alpha = 0
                 
                 }) { (Bool) -> Void in
                     
-                    self.delay(3.0, closure: { () -> () in
+                    self.delay(2.0, closure: { () -> () in
                         
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
                         self.timer.fire()

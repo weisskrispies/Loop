@@ -57,6 +57,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LandingScreen5s@1x" translatesAutoresizingMaskIntoConstraints="NO" id="Fo7-Ym-yvI">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Circle_HitHint" translatesAutoresizingMaskIntoConstraints="NO" id="IRu-5T-We8">
+                                        <rect key="frame" x="221" y="444" width="45" height="45"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="OuterCircle_HitHint" translatesAutoresizingMaskIntoConstraints="NO" id="2ID-sR-5JT">
+                                        <rect key="frame" x="213" y="436" width="61" height="61"/>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <connections>
@@ -73,6 +79,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="scu-Rw-vma"/>
                     <connections>
+                        <outlet property="hitHintCircleImage" destination="2ID-sR-5JT" id="kWH-Lu-HC8"/>
+                        <outlet property="hitHintDotImage" destination="IRu-5T-We8" id="4cP-Dm-HbA"/>
                         <outlet property="landingScreenImage" destination="Fo7-Ym-yvI" id="LnW-W5-dcb"/>
                         <outlet property="tableView" destination="1Ie-YR-Mil" id="6tA-5f-RIh"/>
                     </connections>
@@ -88,6 +96,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LandingScreen5s@1x" width="375" height="667"/>
+        <image name="Circle_HitHint" width="45" height="45"/>
+        <image name="LandingScreen5s@1x" width="320" height="568"/>
+        <image name="OuterCircle_HitHint" width="45" height="45"/>
     </resources>
 </document>
