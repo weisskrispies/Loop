@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return recognizer
         }()
     
+    var timer: NSTimer!
+    
     var currentHeadlineRow: Int = 0
     
     override func viewDidLoad() {
@@ -93,45 +95,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        let indexPath: NSIndexPath? = tableView.indexPathForRowAtPoint(location)
         
         print("did recognize long press")
-        
-        UIView.animateWithDuration(0.6, animations: { () -> Void in
-            self.landingScreenImage.alpha = 0
-            
-            }) { (Bool) -> Void in
-                self.tableViewScrollToNext(true)
-        }
-        
-        
+
         if sender.state == UIGestureRecognizerState.Began {
-    
-        
+            UIView.animateWithDuration(0.6, animations: { () -> Void in
+                self.landingScreenImage.alpha = 0
+            }) { (Bool) -> Void in
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
+                self.timer.fire()
+            }
         } else if sender.state == UIGestureRecognizerState.Changed {
             
             
         } else if sender.state == UIGestureRecognizerState.Ended {
-            
+            timer.invalidate()
         }
         
+    }
+    
+    func patrickIsAwesome() {
+        tableViewScrollToNext(true)
     }
     
     func tableViewScrollToNext(animated: Bool) {
         
         print("scrolling to next")
         
-        let delay = 4.0 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//        let delay = 4.0 * Double(NSEC_PER_SEC)
+//        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//        
+//
+//        
+//        dispatch_after(time, dispatch_get_main_queue(), {
+//            
+//            
+//        })
         
         let indexPath = NSIndexPath(forRow: self.currentHeadlineRow+1, inSection: 0)
         
-        dispatch_after(time, dispatch_get_main_queue(), {
-            
-            UIView.animateWithDuration(0.8, animations: { () -> Void in
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
-            })
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
         })
-        
-        
-        
     }
 
 
