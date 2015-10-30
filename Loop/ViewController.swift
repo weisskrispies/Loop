@@ -13,7 +13,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var landingScreenImage: UIImageView!
     
-    var headlines = ["Square files for much-anticipated IPO", "Hurricane Joaquin headed for eastern US this weekend", "Steve Ballmer now owns 4% of Twitter", "San Francisco passes law to eliminate sales tax by 2020", "California records warmest October in past 200 years", "Marina man wanted for arson arrested", "Tinder parent company files for IPO in November", "Elon Musk shows off first working Hyperloop prototype", "Couch Surfing announces partnership with Hyatt & Marriott Hotels", "Kate Montgomery has a new job at Lendable"]
+    var headlines: [PFObject]! = []
+
+    var timer: NSTimer!
+    
+    var currentHeadlineRow: Int = 0
+    
+//    var headlines = ["Square files for much-anticipated IPO", "Hurricane Joaquin headed for eastern US this weekend", "Steve Ballmer now owns 4% of Twitter", "San Francisco passes law to eliminate sales tax by 2020", "California records warmest October in past 200 years", "Marina man wanted for arson arrested", "Tinder parent company files for IPO in November", "Elon Musk shows off first working Hyperloop prototype", "Couch Surfing announces partnership with Hyatt & Marriott Hotels", "Kate Montgomery has a new job at Lendable"]
     
     var categories = ["NEED TO KNOW", "NEED TO KNOW", "NEED TO KNOW", "LOCAL", "LOCAL", "LOCAL", "TECH + DESIGN", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
     
@@ -26,15 +32,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return recognizer
         }()
     
-    var timer: NSTimer!
-    
-    var currentHeadlineRow: Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let numberOfSections = tableView.numberOfSections
-        let numberOfRowsInSection = tableView.numberOfRowsInSection(numberOfSections-1)
+        // querries the parse database for content and populates the table
+        let query = PFQuery(className: "Headlines")
+        query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
+
+            self.headlines = results
+            self.tableView.reloadData()
+            
+        }
+        
+//        let numberOfSections = tableView.numberOfSections
+//        let numberOfRowsInSection = tableView.numberOfRowsInSection(numberOfSections-1)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,9 +67,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         print("Row: \(indexPath.row)")
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Headline Cell") as! HeadlineCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("HeadlineCell") as! HeadlineCell
         
-        cell.headlineLabel.text = headlines[indexPath.row]
+        let headline = headlines[indexPath.row]
+        cell.headlineLabel.text = headline["Headline"] as? String
+        
         cell.backgroundColor = lightPurpleColor
 
         currentHeadlineRow = indexPath.row
@@ -99,9 +114,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if sender.state == UIGestureRecognizerState.Began {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
                 self.landingScreenImage.alpha = 0
-            }) { (Bool) -> Void in
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
-                self.timer.fire()
+                
+                }) { (Bool) -> Void in
+                    
+                    self.delay(3.0, closure: { () -> () in
+                        
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
+                        self.timer.fire()
+                        
+                    })
             }
         } else if sender.state == UIGestureRecognizerState.Changed {
             
@@ -120,21 +141,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("scrolling to next")
         
-//        let delay = 4.0 * Double(NSEC_PER_SEC)
-//        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-//        
-//
-//        
-//        dispatch_after(time, dispatch_get_main_queue(), {
-//            
-//            
-//        })
-        
         let indexPath = NSIndexPath(forRow: self.currentHeadlineRow+1, inSection: 0)
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
         })
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 
 

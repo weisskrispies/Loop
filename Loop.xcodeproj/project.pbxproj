@@ -15,6 +15,18 @@
 		39FE8E081BD685ED000DDC3D /* LoopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8E071BD685ED000DDC3D /* LoopTests.swift */; };
 		39FE8E131BD685ED000DDC3D /* LoopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8E121BD685ED000DDC3D /* LoopUITests.swift */; };
 		39FE8E211BD69387000DDC3D /* HeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8E201BD69387000DDC3D /* HeadlineCell.swift */; settings = {ASSET_TAGS = (); }; };
+		39FE8E7E1BE4248C000DDC3D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E7D1BE4248C000DDC3D /* Accounts.framework */; };
+		39FE8E891BE424E1000DDC3D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E7F1BE424E1000DDC3D /* AudioToolbox.framework */; };
+		39FE8E8A1BE424E1000DDC3D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E801BE424E1000DDC3D /* CFNetwork.framework */; };
+		39FE8E8B1BE424E1000DDC3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E811BE424E1000DDC3D /* CoreGraphics.framework */; };
+		39FE8E8C1BE424E1000DDC3D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E821BE424E1000DDC3D /* CoreLocation.framework */; };
+		39FE8E8D1BE424E1000DDC3D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E831BE424E1000DDC3D /* libsqlite3.tbd */; };
+		39FE8E8E1BE424E1000DDC3D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E841BE424E1000DDC3D /* libz.tbd */; };
+		39FE8E8F1BE424E1000DDC3D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E851BE424E1000DDC3D /* QuartzCore.framework */; };
+		39FE8E901BE424E1000DDC3D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E861BE424E1000DDC3D /* Security.framework */; };
+		39FE8E911BE424E1000DDC3D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E871BE424E1000DDC3D /* StoreKit.framework */; };
+		39FE8E921BE424E1000DDC3D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE8E881BE424E1000DDC3D /* SystemConfiguration.framework */; };
+		98985D08D2E2DF19A69BF81F /* libPods-Loop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B1D0AF49375818BA8793B9 /* libPods-Loop.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00B1D0AF49375818BA8793B9 /* libPods-Loop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Loop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FE8DEF1BD685ED000DDC3D /* Loop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FE8DF21BD685ED000DDC3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39FE8DF41BD685ED000DDC3D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +62,20 @@
 		39FE8E121BD685ED000DDC3D /* LoopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopUITests.swift; sourceTree = "<group>"; };
 		39FE8E141BD685ED000DDC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39FE8E201BD69387000DDC3D /* HeadlineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlineCell.swift; sourceTree = "<group>"; };
+		39FE8E7A1BE3FCEC000DDC3D /* Loop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Loop-Bridging-Header.h"; sourceTree = "<group>"; };
+		39FE8E7D1BE4248C000DDC3D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		39FE8E7F1BE424E1000DDC3D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		39FE8E801BE424E1000DDC3D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		39FE8E811BE424E1000DDC3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		39FE8E821BE424E1000DDC3D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		39FE8E831BE424E1000DDC3D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		39FE8E841BE424E1000DDC3D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		39FE8E851BE424E1000DDC3D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		39FE8E861BE424E1000DDC3D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		39FE8E871BE424E1000DDC3D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		39FE8E881BE424E1000DDC3D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6B1FF3BB2B3E46265ED06EFC /* Pods-Loop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.release.xcconfig"; sourceTree = "<group>"; };
+		7E2C55722BB2F53C7E4797ED /* Pods-Loop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +83,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39FE8E891BE424E1000DDC3D /* AudioToolbox.framework in Frameworks */,
+				39FE8E8A1BE424E1000DDC3D /* CFNetwork.framework in Frameworks */,
+				39FE8E8B1BE424E1000DDC3D /* CoreGraphics.framework in Frameworks */,
+				39FE8E8C1BE424E1000DDC3D /* CoreLocation.framework in Frameworks */,
+				39FE8E8D1BE424E1000DDC3D /* libsqlite3.tbd in Frameworks */,
+				39FE8E8E1BE424E1000DDC3D /* libz.tbd in Frameworks */,
+				39FE8E8F1BE424E1000DDC3D /* QuartzCore.framework in Frameworks */,
+				39FE8E901BE424E1000DDC3D /* Security.framework in Frameworks */,
+				39FE8E911BE424E1000DDC3D /* StoreKit.framework in Frameworks */,
+				39FE8E921BE424E1000DDC3D /* SystemConfiguration.framework in Frameworks */,
+				39FE8E7E1BE4248C000DDC3D /* Accounts.framework in Frameworks */,
+				98985D08D2E2DF19A69BF81F /* libPods-Loop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +115,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073223D75C287356E773351A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39FE8E7F1BE424E1000DDC3D /* AudioToolbox.framework */,
+				39FE8E801BE424E1000DDC3D /* CFNetwork.framework */,
+				39FE8E811BE424E1000DDC3D /* CoreGraphics.framework */,
+				39FE8E821BE424E1000DDC3D /* CoreLocation.framework */,
+				39FE8E831BE424E1000DDC3D /* libsqlite3.tbd */,
+				39FE8E841BE424E1000DDC3D /* libz.tbd */,
+				39FE8E851BE424E1000DDC3D /* QuartzCore.framework */,
+				39FE8E861BE424E1000DDC3D /* Security.framework */,
+				39FE8E871BE424E1000DDC3D /* StoreKit.framework */,
+				39FE8E881BE424E1000DDC3D /* SystemConfiguration.framework */,
+				39FE8E7D1BE4248C000DDC3D /* Accounts.framework */,
+				00B1D0AF49375818BA8793B9 /* libPods-Loop.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		39FE8DE61BD685ED000DDC3D = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +141,8 @@
 				39FE8E061BD685ED000DDC3D /* LoopTests */,
 				39FE8E111BD685ED000DDC3D /* LoopUITests */,
 				39FE8DF01BD685ED000DDC3D /* Products */,
+				6D83BCCEC7176E0E372D1924 /* Pods */,
+				073223D75C287356E773351A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +166,7 @@
 				39FE8DFB1BD685ED000DDC3D /* LaunchScreen.storyboard */,
 				39FE8DFE1BD685ED000DDC3D /* Info.plist */,
 				39FE8E201BD69387000DDC3D /* HeadlineCell.swift */,
+				39FE8E7A1BE3FCEC000DDC3D /* Loop-Bridging-Header.h */,
 			);
 			path = Loop;
 			sourceTree = "<group>";
@@ -128,6 +189,15 @@
 			path = LoopUITests;
 			sourceTree = "<group>";
 		};
+		6D83BCCEC7176E0E372D1924 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E2C55722BB2F53C7E4797ED /* Pods-Loop.debug.xcconfig */,
+				6B1FF3BB2B3E46265ED06EFC /* Pods-Loop.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39FE8E171BD685ED000DDC3D /* Build configuration list for PBXNativeTarget "Loop" */;
 			buildPhases = (
+				F58673541D8786CC9D07C00C /* Check Pods Manifest.lock */,
 				39FE8DEB1BD685ED000DDC3D /* Sources */,
 				39FE8DEC1BD685ED000DDC3D /* Frameworks */,
 				39FE8DED1BD685ED000DDC3D /* Resources */,
+				5B483C761A5B994A6633B8AD /* Embed Pods Frameworks */,
+				3B6E9608CADE89FFFC8EDB38 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,6 +263,7 @@
 		39FE8DE71BD685ED000DDC3D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Patrick Weiss";
 				TargetAttributes = {
@@ -252,6 +326,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B6E9608CADE89FFFC8EDB38 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Loop/Pods-Loop-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B483C761A5B994A6633B8AD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Loop/Pods-Loop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F58673541D8786CC9D07C00C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39FE8DEB1BD685ED000DDC3D /* Sources */ = {
@@ -398,23 +520,30 @@
 		};
 		39FE8E181BD685ED000DDC3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E2C55722BB2F53C7E4797ED /* Pods-Loop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Loop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = weisskrispies.Loop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Loop/Loop-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		39FE8E191BD685ED000DDC3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B1FF3BB2B3E46265ED06EFC /* Pods-Loop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Loop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = weisskrispies.Loop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Loop/Loop-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -485,6 +614,7 @@
 				39FE8E191BD685ED000DDC3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39FE8E1A1BD685ED000DDC3D /* Build configuration list for PBXNativeTarget "LoopTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +623,7 @@
 				39FE8E1C1BD685ED000DDC3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39FE8E1D1BD685ED000DDC3D /* Build configuration list for PBXNativeTarget "LoopUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +632,7 @@
 				39FE8E1F1BD685ED000DDC3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
