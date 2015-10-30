@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Loop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="GU7-Bd-ep7"/>
+                        <viewControllerLayoutGuide type="bottom" id="tZu-p7-DPR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="568" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Ie-YR-Mil">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Headline Cell" rowHeight="568" id="b6V-FF-DxO" customClass="HeadlineCell" customModule="Loop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="b6V-FF-DxO" id="g8i-pb-OqR">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="567.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Some awesome headline" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIB-wM-8sp">
+                                                    <rect key="frame" x="8" y="178" width="304" height="185"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="185" id="Tob-3h-A3Z"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UIB-wM-8sp" firstAttribute="centerY" secondItem="g8i-pb-OqR" secondAttribute="centerY" id="KZo-GB-WtS"/>
+                                                <constraint firstAttribute="trailing" secondItem="UIB-wM-8sp" secondAttribute="trailing" constant="8" id="RVo-bk-NyM"/>
+                                                <constraint firstItem="UIB-wM-8sp" firstAttribute="leading" secondItem="g8i-pb-OqR" secondAttribute="leading" constant="8" id="bHS-6b-2T5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="headlineLabel" destination="UIB-wM-8sp" id="Wnq-lo-kMe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9AG-9A-X2T">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LandingScreen5s@1x" translatesAutoresizingMaskIntoConstraints="NO" id="Fo7-Ym-yvI">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    </imageView>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gTA-AA-rzN" appends="YES" id="qAG-XX-grX"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1Ie-YR-Mil" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4VF-DO-4ki"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ie-YR-Mil" secondAttribute="trailing" id="Hdl-yQ-eMC"/>
+                            <constraint firstItem="1Ie-YR-Mil" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="k71-0H-Jg9"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="scu-Rw-vma"/>
+                    <connections>
+                        <outlet property="landingScreenImage" destination="Fo7-Ym-yvI" id="LnW-W5-dcb"/>
+                        <outlet property="tableView" destination="1Ie-YR-Mil" id="6tA-5f-RIh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gTA-AA-rzN">
+                    <connections>
+                        <action selector="onLongPress:" destination="BYZ-38-t0r" id="JMd-ea-AuU"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="713" y="366"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LandingScreen5s@1x" width="375" height="667"/>
+    </resources>
 </document>
