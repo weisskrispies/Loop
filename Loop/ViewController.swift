@@ -1,4 +1,4 @@
-//
+    //
 //  ViewController.swift
 //  Loop
 //
@@ -15,18 +15,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var hitHintDotImage: UIImageView!
     @IBOutlet weak var hitHintCircleImage: UIImageView!
     
-    var headlines: [PFObject]! = []
+    var newsStoriesByCategory: [String: [PFObject]]! = [String: [PFObject]]()
 
     var timer: NSTimer!
     
     var currentHeadlineRow: Int = 0
     
-//    var headlines = ["Square files for much-anticipated IPO", "Hurricane Joaquin headed for eastern US this weekend", "Steve Ballmer now owns 4% of Twitter", "San Francisco passes law to eliminate sales tax by 2020", "California records warmest October in past 200 years", "Marina man wanted for arson arrested", "Tinder parent company files for IPO in November", "Elon Musk shows off first working Hyperloop prototype", "Couch Surfing announces partnership with Hyatt & Marriott Hotels", "Kate Montgomery has a new job at Lendable"]
+    var categories = ["NEED TO KNOW", "LOCAL", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
     
-    var categories = ["NEED TO KNOW", "NEED TO KNOW", "NEED TO KNOW", "LOCAL", "LOCAL", "LOCAL", "TECH + DESIGN", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
-    
-    var lightPurpleColor = UIColor(red: 132/255, green: 96/255, blue: 140/255, alpha: 1.0)
     var darkPurpleColor = UIColor(red: 109/255, green: 67/255, blue: 120/255, alpha: 1.0)
+    var lightPurpleColor = UIColor(red: 132/255, green: 96/255, blue: 140/255, alpha: 1.0)
+    var lightTurquoise = UIColor(red: 53/255, green: 166/255, blue: 165/255, alpha: 1.0)
+    var darkTurquoise = UIColor(red: 36/255, green: 110/255, blue: 139/255, alpha: 1.0)
+    var darkBlue = UIColor(red: 60/255, green: 62/255, blue: 112/255, alpha: 1.0)
     
     // Instantiate long press gesture
     let longPress: UILongPressGestureRecognizer = {
@@ -34,22 +35,44 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return recognizer
         }()
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+        
         // querries the parse database for content and populates the table
         let query = PFQuery(className: "Headlines")
+        
+        // scans for only stories in Parse with today's date
+        query.whereKey("headline_date", greaterThan: today)
+        
         query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
-
-            self.headlines = results
+            if results == nil {
+                return
+            }
+            
+            for newsStory in results! {
+                var category = newsStory["Category"] as? String
+                
+                if category != nil {
+                    category = category?.uppercaseString
+                    
+                    var newsStories = self.newsStoriesByCategory[category!]
+                    if newsStories == nil {
+                        newsStories = []
+                    }
+                    newsStories!.append(newsStory)
+                    
+                    self.newsStoriesByCategory[category!] = newsStories
+                    
+                    print("newsStories: \(newsStories)")
+                    print("class newsStories: \(self.newsStoriesByCategory[category!])")
+                }
+            }
             self.tableView.reloadData()
             
         }
-        
-//        let numberOfSections = tableView.numberOfSections
-//        let numberOfRowsInSection = tableView.numberOfRowsInSection(numberOfSections-1)
         
         UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
             self.hitHintCircleImage.transform = CGAffineTransformMakeScale(1.3, 1.3)
@@ -59,55 +82,90 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // sets the number of sections to the number of headlines
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return categories.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return headlines.count
+        let categoryName = categories[section]
         
+        let newsStories = newsStoriesByCategory[categoryName]
+        
+        if newsStories != nil {
+            return newsStories!.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        print("Row: \(indexPath.row)")
+        print("Row: \(indexPath.row), Section: \(indexPath.section)")
+        print ("row height: \(tableView.rowHeight)")
         
         let cell = tableView.dequeueReusableCellWithIdentifier("HeadlineCell") as! HeadlineCell
         
-        let headline = headlines[indexPath.row]
-        cell.headlineLabel.text = headline["Headline"] as? String
+        let categoryName = categories[indexPath.section]
         
-        cell.backgroundColor = lightPurpleColor
-
+        let newsStories = newsStoriesByCategory[categoryName]!
+        let newsStory = newsStories[indexPath.row]
+        let headline = newsStory["Headline"] as? String
+        
+        cell.headlineLabel.text = headline
+        
+        //update to assign
+        cell.backgroundColor = backgroundColorForSection(indexPath.section)
+        
         currentHeadlineRow = indexPath.row
+        print ("current headline row: \(indexPath.row)")
         
         return cell
     }
     
-    // sets the number of sections to the number of headlines
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return headlines.count
-    }
-    
     // creates and sets the header's content and aesthetic
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        let categoryName = categories[section]
+        let newsStories = newsStoriesByCategory[categoryName]
+        if newsStories == nil || newsStories?.count == 0 {
+            return nil
+        }
+        
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         let headlineLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 300, height: 40))
         
-        headlineLabel.text = categories[0]
+        headlineLabel.text = categoryName
         headlineLabel.textColor = UIColor.whiteColor()
+        headerView.backgroundColor = UIColor.clearColor()
         headerView.addSubview(headlineLabel)
         
         return headerView
     }
     
+    // sets the row height to full screen
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (indexPath.row != 0) {
+            return UIScreen.mainScreen().bounds.height
+        }
+        return UIScreen.mainScreen().bounds.height - self.tableView.sectionHeaderHeight
+    }
+    
     // set the header height
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        let categoryName = categories[section]
+        let newsStories = newsStoriesByCategory[categoryName]
+        if newsStories == nil || newsStories?.count == 0 {
+            return 0
+        }
         
+        return 40
     }
 
     @IBAction func onLongPress(sender: UILongPressGestureRecognizer) {
@@ -123,11 +181,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.landingScreenImage.alpha = 0
                 self.hitHintCircleImage.alpha = 0
                 self.hitHintDotImage.alpha = 0
+                self.landingScreenImage.frame.origin.y = 568
                 
                 }) { (Bool) -> Void in
                     
                     self.delay(2.0, closure: { () -> () in
                         
+                    
+                    //insert if statement that says 'if headline count < total number, otherwise, segue
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
                         self.timer.fire()
                         
@@ -142,6 +203,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //assigns the background color to each section 
+    func backgroundColorForSection(sectionIndex: Int) -> UIColor {
+
+        switch sectionIndex {
+        case 0: return darkPurpleColor
+        case 1: return lightPurpleColor
+        case 2: return lightTurquoise
+        case 3: return darkTurquoise
+        case 4: return darkBlue
+        default: return darkPurpleColor
+        }
+    }
+
+    
     func patrickIsAwesome() {
         tableViewScrollToNext(true)
     }
@@ -152,9 +227,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let indexPath = NSIndexPath(forRow: self.currentHeadlineRow+1, inSection: 0)
         
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
-        })
+//        UIView.animateWithDuration(0.5, animations: { () -> Void in
+//            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
+//        })
     }
     
     func delay(delay:Double, closure:()->()) {
