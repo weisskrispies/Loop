@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var hitHintDotImage: UIImageView!
     @IBOutlet weak var hitHintCircleImage: UIImageView!
     
+    
     var newsStoriesByCategory: [String: [PFObject]]! = [String: [PFObject]]()
 
     var timer: NSTimer!
@@ -29,23 +30,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var darkTurquoise = UIColor(red: 36/255, green: 110/255, blue: 139/255, alpha: 1.0)
     var darkBlue = UIColor(red: 60/255, green: 62/255, blue: 112/255, alpha: 1.0)
     
-    // Instantiate long press gesture
-    let longPress: UILongPressGestureRecognizer = {
-        let recognizer = UILongPressGestureRecognizer()
-        return recognizer
-        }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
         
+//        for view in tableView.subviews {
+//            if view.isKindOfClass(UIScrollView) {
+//                view.addGestureRecognizer(onLongPress)
+//            }
+//        }
+        
         // querries the parse database for content and populates the table
         let query = PFQuery(className: "Headlines")
         
         // scans for only stories in Parse with today's date
-        query.whereKey("headline_date", greaterThan: today)
+//        query.whereKey("headline_date", greaterThan: today)
+
         
         query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
             if results == nil {
@@ -59,6 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     category = category?.uppercaseString
                     
                     var newsStories = self.newsStoriesByCategory[category!]
+                    
                     if newsStories == nil {
                         newsStories = []
                     }
@@ -198,7 +200,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             
         } else if sender.state == UIGestureRecognizerState.Ended {
-            timer.invalidate()
+//            timer.invalidate()
         }
         
     }
@@ -224,6 +226,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableViewScrollToNext(animated: Bool) {
         
         print("scrolling to next")
+        
+        //create array of NSIndex path and jump to
         
         let indexPath = NSIndexPath(forRow: self.currentHeadlineRow+1, inSection: 0)
         
