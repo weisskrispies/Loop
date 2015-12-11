@@ -22,7 +22,7 @@ class HeadlineFeed: UIViewController {
     var newsHeadlines = [PFObject]()
     var currentHeadline = 0
     
-    var readingTimePerArticle = 4.0
+    var readingTimePerArticle = 5.0
     
     var welcomeScreenShowing = true
 
@@ -30,8 +30,6 @@ class HeadlineFeed: UIViewController {
     var progress: Float!
     
     var categories = ["NEED TO KNOW", "LOCAL", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
-    var dayOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-
     
     var darkPurpleColor = UIColor(red: 109/255, green: 67/255, blue: 120/255, alpha: 1.0)
     var lightPurpleColor = UIColor(red: 132/255, green: 96/255, blue: 140/255, alpha: 1.0)
@@ -44,16 +42,19 @@ class HeadlineFeed: UIViewController {
         
         // defines the date for today
         let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+        print("today: \(today)")
         
         var headlines = PFObject(className: "Headlines")
         
         let query = PFQuery(className: "Headlines")
         
-        if let weekday = getDayOfWeek("2014-08-27") {
-            welcomeMessageLabel.text = "Your top news for \(dayOfTheWeek[weekday])"
-        } else {
-            print("bad input")
-        }
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayOfWeekString = dateFormatter.stringFromDate(today)
+        print(dayOfWeekString)
+        
+        welcomeMessageLabel.text = "Your awesome news for \(dayOfWeekString)"
         
         // scans for only stories in Parse with today's date
         query.whereKey("headline_date", greaterThan: today)
@@ -78,42 +79,12 @@ class HeadlineFeed: UIViewController {
             }) { (Bool) -> Void in
         }
         
-        let headlineCount = newsHeadlines.count
-        print("Total Headlines Today: \(headlineCount)")
         
     }
-    
-//    @IBAction func onHeadlineTap(sender: AnyObject) {
-//        
-//        currentHeadline++
-//        if currentHeadline < newsHeadlines.count {
-//
-//            UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                self.headlineText.alpha = 0
-//                }, completion: { (Bool) -> Void in
-//                    self.loadNextStory()
-//            })
-//            
-//
-//            
-//        } else {
-//            
-//        }
-//        
-//
-//    }
-    
+        
     @IBAction func onLongPress(sender: AnyObject) {
         
         print("did recognize long press")
-        
-//        self.progressView.setProgress(0.0, animated: false)
-//        print("initial progress reset")
-//        
-//        UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-//            self.progressView.setProgress(1.0, animated: true)
-//            print("go progress go")
-//        })
         
         if sender.state == UIGestureRecognizerState.Began {
         
@@ -131,8 +102,7 @@ class HeadlineFeed: UIViewController {
             if self.welcomeScreenShowing == true {
                 self.delay(self.readingTimePerArticle-1, closure: { () -> () in
                     
-                    self.welcomeScreenShowing = false
-                    print("welcome delay off")
+                    self.welcomeScreenShowing = false   
                     
                     self.timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
                     
@@ -221,20 +191,6 @@ class HeadlineFeed: UIViewController {
             dispatch_get_main_queue(), closure)
     }
     
-    func getDayOfWeek(today:String)->Int? {
-        
-        let formatter  = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        if let todayDate = formatter.dateFromString(today) {
-            let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-            let myComponents = myCalendar.components(.Weekday, fromDate: todayDate)
-            let weekDay = myComponents.weekday
-            return weekDay
-        } else {
-            return nil
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

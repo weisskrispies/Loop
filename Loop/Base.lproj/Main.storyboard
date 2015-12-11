@@ -64,8 +64,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adt-Bt-QU1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Some awesome headline" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfU-KN-GRc">
-                                        <rect key="frame" x="8" y="232" width="292" height="44.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some awesome headline" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfU-KN-GRc">
+                                        <rect key="frame" x="20" y="232" width="280" height="66.5"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="28"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,8 +117,8 @@
                                                     <constraint firstAttribute="width" constant="45" id="acT-qi-6D7"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Your top news for Thursday" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRv-9P-Llz">
-                                                <rect key="frame" x="20" y="179" width="280" height="97"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your top news for Thursday" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRv-9P-Llz">
+                                                <rect key="frame" x="20" y="175" width="280" height="97"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="41"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,7 +172,6 @@
                                     <constraint firstItem="P1Z-v1-8rK" firstAttribute="top" secondItem="adt-Bt-QU1" secondAttribute="top" constant="22" id="yeG-9l-Ma0"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="EqV-Xn-wpk" appends="YES" id="fHt-tT-Gtb"/>
                                     <outletCollection property="gestureRecognizers" destination="sXP-Kc-Ps5" appends="YES" id="a50-se-J62"/>
                                 </connections>
                             </view>
@@ -187,23 +186,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="HeadlineText" destination="AfU-KN-GRc" id="N3j-rk-Bfr"/>
-                        <outlet property="WelcomeHitHint" destination="TLW-Uh-l1L" id="0Kq-ZY-DZe"/>
                         <outlet property="headlineBackground" destination="adt-Bt-QU1" id="Sjp-KM-tTY"/>
                         <outlet property="headlineCategory" destination="0Oh-nf-zOt" id="HBw-r5-Dz8"/>
                         <outlet property="headlineText" destination="AfU-KN-GRc" id="EEM-CT-EhY"/>
                         <outlet property="progressView" destination="P1Z-v1-8rK" id="0e5-5T-p63"/>
+                        <outlet property="welcomeHitHint" destination="TLW-Uh-l1L" id="JFs-OU-ggm"/>
                         <outlet property="welcomeMessageLabel" destination="DRv-9P-Llz" id="7bt-DM-1wG"/>
                         <outlet property="welcomeView" destination="gnc-ln-kAE" id="PNC-Qu-ueC"/>
                         <segue destination="3Ft-bs-ik1" kind="modal" identifier="HeadlinesCompleteSegue" modalTransitionStyle="crossDissolve" id="8CW-xi-DpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3k-Wy-FaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer enabled="NO" id="EqV-Xn-wpk">
-                    <connections>
-                        <action selector="onHeadlineTap:" destination="RI1-iK-FCZ" id="XyP-bf-2j4"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="sXP-Kc-Ps5">
                     <connections>
                         <action selector="onLongPress:" destination="RI1-iK-FCZ" id="2hL-yS-Cce"/>
