@@ -14,6 +14,7 @@ class LoopComplete: UIViewController {
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var headerText: UILabel!
     @IBOutlet weak var completeText: UILabel!
+    @IBOutlet weak var completeCircle: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +23,35 @@ class LoopComplete: UIViewController {
         headerText.alpha = 0
         completeText.alpha = 0
         loopCompletedImages.alpha = 0
+        completeCircle.alpha = 0
 
-        delay(0.5) { () -> () in
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
+        self.loopCompletedImages.animationImages =   [UIImage(named:"LoopComplete-1.png")!,
+            UIImage(named:"LoopComplete-2.png")!,
+            UIImage(named:"LoopComplete-3.png")!,
+            UIImage(named:"LoopComplete-4.png")!]
+        
+
+        
+        
+        
+        delay(1.0) { () -> () in
+            UIView.animateWithDuration(0.9, animations: { () -> Void in
                 self.headerText.alpha = 1
                 self.completeText.alpha = 1
-                
-                }) { (Bool) -> Void in
+                }, completion: { (Bool) -> Void in
                     self.loopCompletedImages.alpha = 1
-                    let images = UIImage.animatedImageNamed("LoopComplete-", duration: 2)
-                    self.loopCompletedImages.image = images
-            }
+                    self.loopCompletedImages.animationDuration = 3.0
+                    self.loopCompletedImages.animationRepeatCount = 1
+                    self.loopCompletedImages.startAnimating()
+            })
+            
         }
 
         
-        delay(3, closure: { () -> () in
+        delay(4, closure: { () -> () in
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.checkMark.alpha = 1
+                self.completeCircle.alpha = 1
             })
         })
         
