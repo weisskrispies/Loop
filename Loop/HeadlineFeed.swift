@@ -13,16 +13,17 @@ class HeadlineFeed: UIViewController {
     @IBOutlet weak var headlineCategory: UILabel!
     @IBOutlet weak var headlineText: UILabel!
     @IBOutlet weak var headlineBackground: UIView!
-    @IBOutlet weak var welcomeHitHint: UIImageView!
-    @IBOutlet weak var welcomeView: UIView!
-    @IBOutlet weak var welcomeMessageLabel: UILabel!
+    @IBOutlet weak var hitHintLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
-
+    @IBOutlet weak var tutorialOverlay: UIView!
+    @IBOutlet weak var tutorialOverlayLowerView: UIView!
+    @IBOutlet weak var tutorialOverlayTopView: UIView!
     
     var newsHeadlines = [PFObject]()
     var currentHeadline = 0
     
-    var readingTimePerArticle = 5.0
+    var readingTimePerArticle = 6.0
+    var totalReadingTime = 0
     
     var welcomeScreenShowing = true
 
@@ -31,30 +32,32 @@ class HeadlineFeed: UIViewController {
     
     var categories = ["NEED TO KNOW", "LOCAL", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
     
-    var darkPurpleColor = UIColor(red: 109/255, green: 67/255, blue: 120/255, alpha: 1.0)
-    var lightPurpleColor = UIColor(red: 132/255, green: 96/255, blue: 140/255, alpha: 1.0)
-    var lightTurquoise = UIColor(red: 53/255, green: 166/255, blue: 165/255, alpha: 1.0)
-    var darkTurquoise = UIColor(red: 36/255, green: 110/255, blue: 139/255, alpha: 1.0)
-    var darkBlue = UIColor(red: 60/255, green: 62/255, blue: 112/255, alpha: 1.0)
+    var darkBlueColor = UIColor(red: 11/255, green: 29/255, blue: 41/255, alpha: 1.0)
+    var lighterBlueColor = UIColor(red: 6/255, green: 43/255, blue: 69/255, alpha: 1.0)
+    var darkRedColor = UIColor(red: 50/255, green: 7/255, blue: 7/255, alpha: 1.0)
+    var lighterRedColor = UIColor(red: 82/255, green: 1/255, blue: 0/255, alpha: 1.0)
+    var yellowColor = UIColor(red: 69/255, green: 69/255, blue: 12/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // defines the date for today
-        let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
-        print("today: \(today)")
         
         var headlines = PFObject(className: "Headlines")
         
         let query = PFQuery(className: "Headlines")
         
+        tutorialOverlayTopView.backgroundColor = darkBlueColor
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        let dayOfWeekString = dateFormatter.stringFromDate(today)
-        print(dayOfWeekString)
+        delay(0.75) { () -> () in
+            UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
+                self.tutorialOverlay.alpha = 1
+                }) { (Bool) -> Void in
+                    
+            }
+        }
+
         
-        welcomeMessageLabel.text = "Your awesome news for \(dayOfWeekString)"
+        // defines the date for today
+        let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
         
         // scans for only stories in Parse with today's date
         query.whereKey("headline_date", greaterThan: today)
@@ -63,6 +66,10 @@ class HeadlineFeed: UIViewController {
             if let objects = objects
                 where error == nil {
 //                print("Successfully retrieved: \(objects)")
+                    print("\(objects.count) Articles")
+                    
+                    // identify # of headlines and time to read
+                    self.totalReadingTime = Int(Double(objects.count) * self.readingTimePerArticle)
 
                 for headline in objects{
                     self.newsHeadlines.append(headline)
@@ -74,47 +81,29 @@ class HeadlineFeed: UIViewController {
             }
         }
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
-            self.welcomeHitHint.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            }) { (Bool) -> Void in
-        }
-        
-        
     }
-        
+    
     @IBAction func onLongPress(sender: AnyObject) {
         
         print("did recognize long press")
         
         if sender.state == UIGestureRecognizerState.Began {
-        
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.welcomeView.alpha = 0
-                
-                UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-                    self.progressView.setProgress(1.0, animated: true)
-                    print("go progress go")
-                })
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.tutorialOverlay.alpha = 0
                 
             })
             
-            // turns off welcome screen delay after first dismissed
-            if self.welcomeScreenShowing == true {
-                self.delay(self.readingTimePerArticle-1, closure: { () -> () in
-                    
-                    self.welcomeScreenShowing = false   
-                    
-                    self.timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
-                    
-                    self.timer.fire()
-                    
-                })
-            } else {
-                
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: false)
+            UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
+                self.progressView.setProgress(1.0, animated: true)
+            })
+            
+            delay(4.5, closure: { () -> () in
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
                 
                 self.timer.fire()
-            }
+            })
+            
             
         } else if sender.state == UIGestureRecognizerState.Changed {
             
@@ -134,9 +123,9 @@ class HeadlineFeed: UIViewController {
             self.headlineText.alpha = 0
             }) { (Bool) -> Void in
                 
+                print("firing 2nd progress bar")
                 UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
                     self.progressView.setProgress(1.0, animated: true)
-                    print("go progress go")
                 })
                 
                 self.loadNextStory()
@@ -157,12 +146,12 @@ class HeadlineFeed: UIViewController {
                     self.headlineCategory.text = categoryString.uppercaseString
                 
                     switch categoryString {
-                    case "Need to know": self.headlineBackground.backgroundColor = self.darkPurpleColor
-                    case "Local": self.headlineBackground.backgroundColor = self.lightPurpleColor
-                    case "Tech + Design": self.headlineBackground.backgroundColor = self.lightTurquoise
-                    case "Entertainment": self.headlineBackground.backgroundColor = self.darkTurquoise
-                    case "Random Facts": self.headlineBackground.backgroundColor = self.darkBlue
-                    default: self.headlineBackground.backgroundColor = self.darkPurpleColor
+                    case "Need to Know": self.headlineBackground.backgroundColor = self.darkBlueColor
+                    case "Local": self.headlineBackground.backgroundColor = self.lighterBlueColor
+                    case "Tech + Design": self.headlineBackground.backgroundColor = self.darkRedColor
+                    case "Entertainment": self.headlineBackground.backgroundColor = self.lighterRedColor
+                    case "Random Facts": self.headlineBackground.backgroundColor = self.yellowColor
+                    default: self.headlineBackground.backgroundColor = self.darkBlueColor
                         
                     }
                 }
@@ -194,6 +183,10 @@ class HeadlineFeed: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
 

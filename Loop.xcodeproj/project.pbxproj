@@ -10,6 +10,7 @@
 		391C66761C10C6AB005A2438 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C66751C10C6AB005A2438 /* SignInViewController.swift */; };
 		391C66781C10C6CC005A2438 /* HeadlineFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C66771C10C6CC005A2438 /* HeadlineFeed.swift */; };
 		391C667D1C111988005A2438 /* LoopComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C667C1C111988005A2438 /* LoopComplete.swift */; };
+		39235B851C3F07F100079500 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39235B841C3F07F100079500 /* LandingPageViewController.swift */; };
 		39D019D41BFC031B00FCAD2E /* LongPressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D019D31BFC031B00FCAD2E /* LongPressView.swift */; };
 		39FE8DF31BD685ED000DDC3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8DF21BD685ED000DDC3D /* AppDelegate.swift */; };
 		39FE8DF51BD685ED000DDC3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8DF41BD685ED000DDC3D /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		391C66751C10C6AB005A2438 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		391C66771C10C6CC005A2438 /* HeadlineFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlineFeed.swift; sourceTree = "<group>"; };
 		391C667C1C111988005A2438 /* LoopComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopComplete.swift; sourceTree = "<group>"; };
+		39235B841C3F07F100079500 /* LandingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
 		39D019D31BFC031B00FCAD2E /* LongPressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPressView.swift; sourceTree = "<group>"; };
 		39FE8DEF1BD685ED000DDC3D /* Loop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FE8DF21BD685ED000DDC3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				391C66751C10C6AB005A2438 /* SignInViewController.swift */,
 				39FE8DF41BD685ED000DDC3D /* ViewController.swift */,
 				391C667C1C111988005A2438 /* LoopComplete.swift */,
+				39235B841C3F07F100079500 /* LandingPageViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				39FE8DF51BD685ED000DDC3D /* ViewController.swift in Sources */,
 				391C66781C10C6CC005A2438 /* HeadlineFeed.swift in Sources */,
 				39FE8E211BD69387000DDC3D /* HeadlineCell.swift in Sources */,
+				39235B851C3F07F100079500 /* LandingPageViewController.swift in Sources */,
 				39D019D41BFC031B00FCAD2E /* LongPressView.swift in Sources */,
 				391C667D1C111988005A2438 /* LoopComplete.swift in Sources */,
 				391C66761C10C6AB005A2438 /* SignInViewController.swift in Sources */,
@@ -555,7 +559,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickweiss.intheloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9ddd63fa-30c6-44d0-abbe-f1f56713ac90";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Loop/Loop-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -573,7 +577,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickweiss.intheloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9ddd63fa-30c6-44d0-abbe-f1f56713ac90";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Loop/Loop-Bridging-Header.h";
 			};
 			name = Release;

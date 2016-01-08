@@ -15,6 +15,7 @@ class LoopComplete: UIViewController {
     @IBOutlet weak var headerText: UILabel!
     @IBOutlet weak var completeText: UILabel!
     @IBOutlet weak var completeCircle: UIImageView!
+    @IBOutlet weak var reReadButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class LoopComplete: UIViewController {
         completeText.alpha = 0
         loopCompletedImages.alpha = 0
         completeCircle.alpha = 0
+        reReadButton.alpha = 0
 
         self.loopCompletedImages.animationImages =   [UIImage(named:"LoopComplete-1.png")!,
             UIImage(named:"LoopComplete-2.png")!,
@@ -41,9 +43,11 @@ class LoopComplete: UIViewController {
                 }, completion: { (Bool) -> Void in
                     self.loopCompletedImages.alpha = 1
                     self.loopCompletedImages.animationDuration = 3.0
-                    self.loopCompletedImages.animationRepeatCount = 1
+                    self.loopCompletedImages.animationRepeatCount = 0
                     self.loopCompletedImages.startAnimating()
             })
+            
+//            self.loopCompletedImages.stopAnimating()
             
         }
 
@@ -52,6 +56,7 @@ class LoopComplete: UIViewController {
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.checkMark.alpha = 1
                 self.completeCircle.alpha = 1
+                self.reReadButton.alpha = 1
             })
         })
         
