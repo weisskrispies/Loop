@@ -121,6 +121,11 @@ class LandingPageViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    @IBAction func unwindToLanding(segue: UIStoryboardSegue) {
+    }
+    
+    
     /*
     // MARK: - Navigation
 

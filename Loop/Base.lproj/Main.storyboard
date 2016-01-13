@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmU-qQ-0aw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="366"/>
+            <point key="canvasLocation" x="-835" y="366"/>
         </scene>
         <!--Landing Page View Controller-->
         <scene sceneID="jZv-Sx-iO8">
@@ -171,35 +171,50 @@
                                         <subviews>
                                             <view alpha="0.96999999999999997" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgl-g2-l5f" userLabel="Upper Box">
                                                 <rect key="frame" x="15" y="15" width="290" height="553"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpL-qz-LaI" userLabel="Hit Hint Circle">
+                                                        <rect key="frame" x="205" y="443" width="50" height="50"/>
+                                                        <subviews>
+                                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Circle_HitHint" translatesAutoresizingMaskIntoConstraints="NO" id="gjc-DP-KQM">
+                                                                <rect key="frame" x="3" y="2" width="45" height="45"/>
+                                                            </imageView>
+                                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="OuterCircle_HitHint" translatesAutoresizingMaskIntoConstraints="NO" id="9gO-M8-Erm">
+                                                                <rect key="frame" x="3" y="2" width="45" height="45"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="BF2-r8-7jF"/>
+                                                            <constraint firstAttribute="width" constant="50" id="V9I-RL-cXc"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="press+hold to cycle through stories" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dq8-OI-wwz">
+                                                        <rect key="frame" x="30" y="443" width="160" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="160" id="5gF-cm-4d7"/>
+                                                            <constraint firstAttribute="height" constant="45" id="M4h-lj-By7"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="YAk-OH-F9c"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-Iq-ceA" userLabel="Lower Box">
-                                                <rect key="frame" x="15" y="405" width="290" height="148"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="press+hold to cycle through stories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dq8-OI-wwz">
-                                                <rect key="frame" x="8" y="376" width="304" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="M4h-lj-By7"/>
+                                                    <constraint firstItem="dq8-OI-wwz" firstAttribute="top" secondItem="dpL-qz-LaI" secondAttribute="top" id="XW8-YV-GyK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dpL-qz-LaI" secondAttribute="trailing" constant="35" id="eXJ-Y3-uq2"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dpL-qz-LaI" secondAttribute="bottom" constant="60" id="kBU-Jt-RaS"/>
+                                                    <constraint firstItem="dpL-qz-LaI" firstAttribute="leading" secondItem="dq8-OI-wwz" secondAttribute="trailing" constant="15" id="y2K-vo-N0F"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="dq8-OI-wwz" secondAttribute="trailing" constant="8" id="1hJ-Mc-Yof"/>
-                                            <constraint firstItem="jwF-Iq-ceA" firstAttribute="leading" secondItem="LOe-LB-CP0" secondAttribute="leading" constant="15" id="3tG-YT-kuL"/>
                                             <constraint firstItem="Cgl-g2-l5f" firstAttribute="leading" secondItem="LOe-LB-CP0" secondAttribute="leading" constant="15" id="Iga-hr-aHw"/>
                                             <constraint firstItem="Cgl-g2-l5f" firstAttribute="top" secondItem="LOe-LB-CP0" secondAttribute="top" constant="15" id="RCL-wt-HUk"/>
-                                            <constraint firstAttribute="bottom" secondItem="jwF-Iq-ceA" secondAttribute="bottom" constant="15" id="UV1-RS-TRF"/>
-                                            <constraint firstItem="dq8-OI-wwz" firstAttribute="top" secondItem="Cgl-g2-l5f" secondAttribute="bottom" constant="-192" id="c1n-dg-yev"/>
-                                            <constraint firstItem="dq8-OI-wwz" firstAttribute="leading" secondItem="LOe-LB-CP0" secondAttribute="leading" constant="8" id="cbQ-0I-frp"/>
-                                            <constraint firstAttribute="trailing" secondItem="jwF-Iq-ceA" secondAttribute="trailing" constant="15" id="ltc-Kc-qnA"/>
                                             <constraint firstAttribute="bottom" secondItem="Cgl-g2-l5f" secondAttribute="bottom" id="mbU-O4-EEe"/>
                                             <constraint firstAttribute="trailing" secondItem="Cgl-g2-l5f" secondAttribute="trailing" constant="15" id="v3v-4i-Ypv"/>
-                                            <constraint firstItem="jwF-Iq-ceA" firstAttribute="top" secondItem="dq8-OI-wwz" secondAttribute="bottom" constant="8" id="vQq-eQ-Tlf"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -238,21 +253,21 @@
                         <outlet property="headlineCategory" destination="0Oh-nf-zOt" id="HBw-r5-Dz8"/>
                         <outlet property="headlineText" destination="AfU-KN-GRc" id="EEM-CT-EhY"/>
                         <outlet property="hitHintLabel" destination="dq8-OI-wwz" id="Ftq-Se-7RA"/>
+                        <outlet property="hitHintOuterCircle" destination="9gO-M8-Erm" id="xyl-bY-rw9"/>
                         <outlet property="progressView" destination="P1Z-v1-8rK" id="Gbz-kB-xHY"/>
                         <outlet property="tutorialOverlay" destination="LOe-LB-CP0" id="8hF-If-SKZ"/>
-                        <outlet property="tutorialOverlayLowerView" destination="jwF-Iq-ceA" id="Eeo-9D-dmL"/>
                         <outlet property="tutorialOverlayTopView" destination="Cgl-g2-l5f" id="Pml-l1-kBl"/>
                         <segue destination="3Ft-bs-ik1" kind="modal" identifier="HeadlinesCompleteSegue" modalTransitionStyle="crossDissolve" id="8CW-xi-DpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3k-Wy-FaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="sXP-Kc-Ps5">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.10000000000000001" id="sXP-Kc-Ps5">
                     <connections>
                         <action selector="onLongPress:" destination="RI1-iK-FCZ" id="2hL-yS-Cce"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="397" y="366"/>
+            <point key="canvasLocation" x="373" y="366"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -389,7 +404,7 @@
                                 </constraints>
                                 <state key="normal" image="Reread_Button"/>
                                 <connections>
-                                    <segue destination="q0K-QB-77g" kind="modal" modalTransitionStyle="coverVertical" id="Qm3-ND-CXU"/>
+                                    <segue destination="gTs-lz-T4e" kind="unwind" unwindAction="unwindToLanding:" id="FKz-bv-LM7"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BAM!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rao-CV-0Ke">
@@ -439,10 +454,10 @@
                         <outlet property="headerText" destination="rao-CV-0Ke" id="7KJ-cf-WZA"/>
                         <outlet property="loopCompletedImages" destination="xEP-BX-q19" id="QxP-te-3oK"/>
                         <outlet property="reReadButton" destination="m8F-a1-eIb" id="pmY-R7-gB1"/>
-                        <segue destination="uny-8j-I71" kind="modal" id="nXK-8N-6cC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyh-N9-khf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gTs-lz-T4e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="794" y="366"/>
         </scene>

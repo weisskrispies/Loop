@@ -16,8 +16,8 @@ class HeadlineFeed: UIViewController {
     @IBOutlet weak var hitHintLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var tutorialOverlay: UIView!
-    @IBOutlet weak var tutorialOverlayLowerView: UIView!
     @IBOutlet weak var tutorialOverlayTopView: UIView!
+    @IBOutlet weak var hitHintOuterCircle: UIImageView!
     
     var newsHeadlines = [PFObject]()
     var currentHeadline = 0
@@ -25,7 +25,7 @@ class HeadlineFeed: UIViewController {
     var readingTimePerArticle = 6.0
     var totalReadingTime = 0
     
-    var welcomeScreenShowing = true
+    var cyclingThroughArticles = false
 
     var timer: NSTimer!
     var progress: Float!
@@ -50,9 +50,19 @@ class HeadlineFeed: UIViewController {
         delay(0.75) { () -> () in
             UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
                 self.tutorialOverlay.alpha = 1
+                
                 }) { (Bool) -> Void in
                     
             }
+            
+            UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
+                self.hitHintOuterCircle.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                }, completion: { (Bool) -> Void in
+                    
+            })
+            
+            
+
         }
 
         
@@ -80,6 +90,7 @@ class HeadlineFeed: UIViewController {
                 print("Error: \(error)")
             }
         }
+    
         
     }
     
@@ -94,15 +105,22 @@ class HeadlineFeed: UIViewController {
                 
             })
             
-            UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-                self.progressView.setProgress(1.0, animated: true)
-            })
-            
-            delay(4.5, closure: { () -> () in
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
+            if !cyclingThroughArticles {
                 
-                self.timer.fire()
-            })
+                UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
+                    self.progressView.setProgress(1.0, animated: true)
+                })
+                
+                timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
+                cyclingThroughArticles = true
+            }
+            
+//            UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
+//                self.progressView.setProgress(1.0, animated: true)
+//            })
+ 
+            
+//            self.timer.fire()
             
             
         } else if sender.state == UIGestureRecognizerState.Changed {
@@ -110,9 +128,14 @@ class HeadlineFeed: UIViewController {
             
         } else if sender.state == UIGestureRecognizerState.Ended {
             timer.invalidate()
+            cyclingThroughArticles = false
+            
+            self.progressView.setProgress(0.0, animated: false)
+            print("initial progress reset")
         }
         
     }
+    
     
     func switchToNextStory() {
         
@@ -123,7 +146,6 @@ class HeadlineFeed: UIViewController {
             self.headlineText.alpha = 0
             }) { (Bool) -> Void in
                 
-                print("firing 2nd progress bar")
                 UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
                     self.progressView.setProgress(1.0, animated: true)
                 })
@@ -165,6 +187,7 @@ class HeadlineFeed: UIViewController {
             })
         } else {
             self.performSegueWithIdentifier("HeadlinesCompleteSegue", sender: nil)
+
         }
 
         currentHeadline++
@@ -187,6 +210,12 @@ class HeadlineFeed: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        timer.invalidate()
     }
     
 
