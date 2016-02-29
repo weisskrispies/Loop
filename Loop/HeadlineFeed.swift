@@ -22,6 +22,8 @@ class HeadlineFeed: UIViewController {
     var newsHeadlines = [PFObject]()
     var currentHeadline = 0
     
+
+    
     var readingTimePerArticle = 6.0
     var totalReadingTime = 0
     
