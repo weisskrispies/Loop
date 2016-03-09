@@ -12,8 +12,8 @@
 		391C667D1C111988005A2438 /* LoopComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391C667C1C111988005A2438 /* LoopComplete.swift */; };
 		39235B851C3F07F100079500 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39235B841C3F07F100079500 /* LandingPageViewController.swift */; };
 		39D019D41BFC031B00FCAD2E /* LongPressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D019D31BFC031B00FCAD2E /* LongPressView.swift */; };
+		39E5572B1C8674F6000C1A28 /* CLTypingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E5572A1C8674F6000C1A28 /* CLTypingLabel.swift */; };
 		39F8C17D1C84F2D4008839CC /* TypewritterTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F8C17C1C84F2D4008839CC /* TypewritterTestViewController.swift */; };
-		39F8C17F1C84F605008839CC /* CLTypingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F8C17E1C84F605008839CC /* CLTypingLabel.swift */; };
 		39FE8DF31BD685ED000DDC3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8DF21BD685ED000DDC3D /* AppDelegate.swift */; };
 		39FE8DF51BD685ED000DDC3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE8DF41BD685ED000DDC3D /* ViewController.swift */; };
 		39FE8DF81BD685ED000DDC3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FE8DF61BD685ED000DDC3D /* Main.storyboard */; };
@@ -60,8 +60,8 @@
 		391C667C1C111988005A2438 /* LoopComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopComplete.swift; sourceTree = "<group>"; };
 		39235B841C3F07F100079500 /* LandingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
 		39D019D31BFC031B00FCAD2E /* LongPressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPressView.swift; sourceTree = "<group>"; };
+		39E5572A1C8674F6000C1A28 /* CLTypingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLTypingLabel.swift; sourceTree = "<group>"; };
 		39F8C17C1C84F2D4008839CC /* TypewritterTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypewritterTestViewController.swift; sourceTree = "<group>"; };
-		39F8C17E1C84F605008839CC /* CLTypingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLTypingLabel.swift; path = "../../../../../Desktop/CLTypingLabel-master/CLTypingLabel.swift"; sourceTree = "<group>"; };
 		39FE8DEF1BD685ED000DDC3D /* Loop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FE8DF21BD685ED000DDC3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39FE8DF41BD685ED000DDC3D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				391C667C1C111988005A2438 /* LoopComplete.swift */,
 				39235B841C3F07F100079500 /* LandingPageViewController.swift */,
 				39F8C17C1C84F2D4008839CC /* TypewritterTestViewController.swift */,
-				39F8C17E1C84F605008839CC /* CLTypingLabel.swift */,
+				39E5572A1C8674F6000C1A28 /* CLTypingLabel.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -416,7 +416,7 @@
 				39FE8E211BD69387000DDC3D /* HeadlineCell.swift in Sources */,
 				39235B851C3F07F100079500 /* LandingPageViewController.swift in Sources */,
 				39D019D41BFC031B00FCAD2E /* LongPressView.swift in Sources */,
-				39F8C17F1C84F605008839CC /* CLTypingLabel.swift in Sources */,
+				39E5572B1C8674F6000C1A28 /* CLTypingLabel.swift in Sources */,
 				391C667D1C111988005A2438 /* LoopComplete.swift in Sources */,
 				391C66761C10C6AB005A2438 /* SignInViewController.swift in Sources */,
 				39FE8DF31BD685ED000DDC3D /* AppDelegate.swift in Sources */,

@@ -8,27 +8,31 @@
 
 import UIKit
 
-class HeadlineFeed: UIViewController {
+class HeadlineFeed: UIViewController, CLTypingLabelDelegate {
 
     @IBOutlet weak var headlineCategory: UILabel!
-    @IBOutlet weak var headlineText: UILabel!
+    @IBOutlet weak var headlineText: CLTypingLabel!
     @IBOutlet weak var headlineBackground: UIView!
     @IBOutlet weak var hitHintLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var backgroundTintView: UIView!
     @IBOutlet weak var tutorialOverlay: UIView!
     @IBOutlet weak var tutorialOverlayTopView: UIView!
     @IBOutlet weak var hitHintOuterCircle: UIImageView!
     
     var newsHeadlines = [PFObject]()
     var currentHeadline = 0
-    
 
-    
     var readingTimePerArticle = 6.0
+    var typeAnimationDuration = 0.05
     var totalReadingTime = 0
     
     var cyclingThroughArticles = false
 
+    // gets the number of times that the app has been opened (from the AppDelegate)
+    var defaults = NSUserDefaults.standardUserDefaults()
+    var appOpenCount = NSUserDefaults.standardUserDefaults().integerForKey("launchCount")
+    var showingInstructionalModal = false
+    
     var timer: NSTimer!
     var progress: Float!
     
@@ -43,31 +47,20 @@ class HeadlineFeed: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("App opened: \(appOpenCount) times")
+        
         var headlines = PFObject(className: "Headlines")
         
         let query = PFQuery(className: "Headlines")
         
         tutorialOverlayTopView.backgroundColor = darkBlueColor
+        backgroundTintView.alpha = 0
         
-        delay(0.75) { () -> () in
-            UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
-                self.tutorialOverlay.alpha = 1
-                
-                }) { (Bool) -> Void in
-                    
-            }
-            
-            UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
-                self.hitHintOuterCircle.transform = CGAffineTransformMakeScale(1.3, 1.3)
-                }, completion: { (Bool) -> Void in
-                    
-            })
-            
-            
+        //runs logic to determine if the app has been open and the tutorial seen > x times
+        showInstructionalModal()
 
-        }
+        headlineText.delegate = self
 
-        
         // defines the date for today
         let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
         
@@ -85,6 +78,7 @@ class HeadlineFeed: UIViewController {
 
                 for headline in objects{
                     self.newsHeadlines.append(headline)
+                    
                 }
                 self.loadNextStory()
                 
@@ -92,71 +86,66 @@ class HeadlineFeed: UIViewController {
                 print("Error: \(error)")
             }
         }
-    
         
     }
     
     @IBAction func onLongPress(sender: AnyObject) {
         
-        print("did recognize long press")
+//        print("did recognize long press")
         
         if sender.state == UIGestureRecognizerState.Began {
             
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.tutorialOverlay.alpha = 0
+            if showingInstructionalModal == true {
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.tutorialOverlay.alpha = 0
+                    
+                })
+            }
+            
+            //Brightens screen when the user is holding
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.backgroundTintView.alpha = 0
                 
             })
+
+            
+            // initiates typewriter animation (from CLTypingLabel)
+            self.headlineText.charInterval = self.typeAnimationDuration
             
             if !cyclingThroughArticles {
                 
-                UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-                    self.progressView.setProgress(1.0, animated: true)
-                })
+                headlineText.continueTyping()
                 
-                timer = NSTimer.scheduledTimerWithTimeInterval(self.readingTimePerArticle, target: self, selector: "switchToNextStory", userInfo: nil, repeats: true)
                 cyclingThroughArticles = true
+
             }
-            
-//            UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-//                self.progressView.setProgress(1.0, animated: true)
-//            })
- 
-            
-//            self.timer.fire()
             
             
         } else if sender.state == UIGestureRecognizerState.Changed {
             
             
         } else if sender.state == UIGestureRecognizerState.Ended {
-            timer.invalidate()
+//            timer.invalidate()
+
             cyclingThroughArticles = false
             
-            self.progressView.setProgress(0.0, animated: false)
-            print("initial progress reset")
+            headlineText.pauseTyping()
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.backgroundTintView.alpha = 0.5
+            })
         }
-        
     }
     
     
     func switchToNextStory() {
         
-        self.progressView.setProgress(0.0, animated: false)
-        print("initial progress reset")
-        
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.headlineText.alpha = 0
             }) { (Bool) -> Void in
                 
-                UIView.animateWithDuration(self.readingTimePerArticle, animations: { () -> Void in
-                    self.progressView.setProgress(1.0, animated: true)
-                })
-                
                 self.loadNextStory()
-                //                print("story #\(self.currentHeadline) loaded")
-                
         }
-        
     }
     
     func loadNextStory() {
@@ -216,10 +205,39 @@ class HeadlineFeed: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        timer.invalidate()
     }
     
+    func typingLabelDidFinishTyping(label: CLTypingLabel) {
+        delay(1) { () -> () in
+            self.switchToNextStory()
+        }
+    }
+    
+    func showInstructionalModal() {
+        
+        if appOpenCount <= 2 {
+            
+            delay(0.75) { () -> () in
+                UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
+                    self.tutorialOverlay.alpha = 1
+                    
+                    }) { (Bool) -> Void in
+                        
+                }
+                
+                UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
+                    self.hitHintOuterCircle.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                    }, completion: { (Bool) -> Void in
+                })
+                
+            }
+            
+            showingInstructionalModal = true
+        } else {
+            print("No need to show instructions, they already done seen it")
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

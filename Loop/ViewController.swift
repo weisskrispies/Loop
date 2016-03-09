@@ -11,11 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var landingScreenImage: UIImageView!
-    @IBOutlet weak var hitHintDotImage: UIImageView!
-    @IBOutlet weak var hitHintCircleImage: UIImageView!
-    
-    
+
     var newsStoriesByCategory: [String: [PFObject]]! = [String: [PFObject]]()
 
     var timer: NSTimer!
@@ -24,28 +20,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var categories = ["NEED TO KNOW", "LOCAL", "TECH + DESIGN", "HOSPITALITY", "FROM YOUR FRIENDS"]
     
-    var darkPurpleColor = UIColor(red: 109/255, green: 67/255, blue: 120/255, alpha: 1.0)
-    var lightPurpleColor = UIColor(red: 132/255, green: 96/255, blue: 140/255, alpha: 1.0)
-    var lightTurquoise = UIColor(red: 53/255, green: 166/255, blue: 165/255, alpha: 1.0)
-    var darkTurquoise = UIColor(red: 36/255, green: 110/255, blue: 139/255, alpha: 1.0)
-    var darkBlue = UIColor(red: 60/255, green: 62/255, blue: 112/255, alpha: 1.0)
+    
+    let prefs = NSUserDefaults.standardUserDefaults()
+    
+    var darkBlueColor = UIColor(red: 11/255, green: 29/255, blue: 41/255, alpha: 1.0)
+    var lighterBlueColor = UIColor(red: 6/255, green: 43/255, blue: 69/255, alpha: 1.0)
+    var darkRedColor = UIColor(red: 50/255, green: 7/255, blue: 7/255, alpha: 1.0)
+    var lighterRedColor = UIColor(red: 82/255, green: 1/255, blue: 0/255, alpha: 1.0)
+    var yellowColor = UIColor(red: 69/255, green: 69/255, blue: 12/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+//        print("times openened: \(launchCount)")
         
-//        for view in tableView.subviews {
-//            if view.isKindOfClass(UIScrollView) {
-//                view.addGestureRecognizer(onLongPress)
-//            }
-//        }
+        let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
         
         // querries the parse database for content and populates the table
         let query = PFQuery(className: "Headlines")
         
         // scans for only stories in Parse with today's date
-//        query.whereKey("headline_date", greaterThan: today)
+        query.whereKey("headline_date", greaterThan: today)
 
         
         query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
@@ -76,10 +71,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
-            self.hitHintCircleImage.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            }) { (Bool) -> Void in
-        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -126,8 +117,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //update to assign
         cell.backgroundColor = backgroundColorForSection(indexPath.section)
         
-        currentHeadlineRow = indexPath.row
-        print ("current headline row: \(indexPath.row)")
+//        currentHeadlineRow = indexPath.row
+//        print ("current headline row: \(indexPath.row)")
         
         return cell
     }
@@ -144,20 +135,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let headlineLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 300, height: 40))
         
         headlineLabel.text = categoryName
-        headlineLabel.textColor = UIColor.whiteColor()
-        headerView.backgroundColor = UIColor.clearColor()
+        headlineLabel.textColor = UIColor.blackColor()
+        headerView.backgroundColor = UIColor.whiteColor()
+        headerView.alpha = 0.5
         headerView.addSubview(headlineLabel)
         
         return headerView
     }
     
     // sets the row height to full screen
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (indexPath.row != 0) {
-            return UIScreen.mainScreen().bounds.height
-        }
-        return UIScreen.mainScreen().bounds.height - self.tableView.sectionHeaderHeight
-    }
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        if (indexPath.row != 0) {
+//            return UIScreen.mainScreen().bounds.height
+//        }
+//        return UIScreen.mainScreen().bounds.height - self.tableView.sectionHeaderHeight
+//    }
     
     // set the header height
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -170,71 +162,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 40
     }
 
-    @IBAction func onLongPress(sender: UILongPressGestureRecognizer) {
-        
-//        let state: UIGestureRecognizerState = gesture.state
-//        let location: CGPoint = gesture.locationInView(tableView)
-//        let indexPath: NSIndexPath? = tableView.indexPathForRowAtPoint(location)
-        
-        print("did recognize long press")
 
-        if sender.state == UIGestureRecognizerState.Began {
-            UIView.animateWithDuration(0.6, animations: { () -> Void in
-                self.landingScreenImage.alpha = 0
-                self.hitHintCircleImage.alpha = 0
-                self.hitHintDotImage.alpha = 0
-                self.landingScreenImage.frame.origin.y = 568
-                
-                }) { (Bool) -> Void in
-                    
-                    self.delay(2.0, closure: { () -> () in
-                        
-                    
-                    //insert if statement that says 'if headline count < total number, otherwise, segue
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "patrickIsAwesome", userInfo: nil, repeats: true)
-                        self.timer.fire()
-                        
-                    })
-            }
-        } else if sender.state == UIGestureRecognizerState.Changed {
-            
-            
-        } else if sender.state == UIGestureRecognizerState.Ended {
-//            timer.invalidate()
-        }
-        
-    }
     
     //assigns the background color to each section 
     func backgroundColorForSection(sectionIndex: Int) -> UIColor {
 
         switch sectionIndex {
-        case 0: return darkPurpleColor
-        case 1: return lightPurpleColor
-        case 2: return lightTurquoise
-        case 3: return darkTurquoise
-        case 4: return darkBlue
-        default: return darkPurpleColor
+        case 0: return darkBlueColor
+        case 1: return lighterBlueColor
+        case 2: return darkRedColor
+        case 3: return lighterRedColor
+        case 4: return lighterRedColor
+        default: return darkBlueColor
         }
     }
 
     
-    func patrickIsAwesome() {
-        tableViewScrollToNext(true)
-    }
-    
-    func tableViewScrollToNext(animated: Bool) {
-        
-        print("scrolling to next")
-        
-        //create array of NSIndex path and jump to
-        
-        let indexPath = NSIndexPath(forRow: self.currentHeadlineRow+1, inSection: 0)
-        
-//        UIView.animateWithDuration(0.5, animations: { () -> Void in
-//            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
-//        })
-    }
+//    func patrickIsAwesome() {
+//        tableViewScrollToNext(true)
+//    }
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
